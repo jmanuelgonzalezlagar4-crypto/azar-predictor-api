@@ -14,7 +14,21 @@ ALL_NUMBERS = set(range(1, 50))
 NEUTRAL_NUMBERS = list(ALL_NUMBERS - set(HOT_NUMBERS) - set(COLD_NUMBERS))
 
 # 1. Configuración del Servidor Web
+# app = Flask(__name__) # app.py - Ajuste del Puerto
+
+from flask import Flask, jsonify
+from flask_cors import CORS
+# ... (otras importaciones)
+
 app = Flask(__name__)
+# CORS permite que tu página web (Frontend) se comunique con este servidor
+CORS(app) 
+
+# --- AÑADE ESTA LÍNEA AQUÍ ---
+app.config['ENV'] = 'production'
+# --- FIN DEL CÓDIGO A AÑADIR ---
+
+# ... (resto de tu lógica de IA)
 # CORS permite que tu página web (Frontend) se comunique con este servidor
 CORS(app) 
 
@@ -65,4 +79,5 @@ def ia_endpoint():
 # 4. Iniciar el Servidor (Solo para pruebas locales)
 if __name__ == '__main__':
     # El puerto 5000 es el estándar de Flask
+
     app.run(debug=True, port=5000)
